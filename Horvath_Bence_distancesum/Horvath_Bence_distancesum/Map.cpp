@@ -31,36 +31,36 @@ Map::Map(int h, int w, string map) :height(h), width(w) {
 	{
 		for (int j = 0; j < width; j++)
 		{
-			Point *v=new Point();
-			v->posX = i;
-			v->posY = j;
-			v->value = -1;
-			vertices.push_back(v);
+			Point * vertex =new Point();
+			vertex->posX = i;
+			vertex->posY = j;
+			vertex->value = -1;
+			vertices.push_back(vertex);
 			if (this->map[i][j]!='X'&& this->map[i][j] != '-' && this->map[i][j]!='T')
 			{
-				endpoints.push_back(v);
+				endpoints.push_back(vertex);
 			}
 			
 		}
 	}
-		for (int i = 0; i < width * height; i++) {
-		Point *p = vertices.at(i);
-		int k = 1;
+
+	for (int i = 0; i < width * height; i++) {
+	Point *vertex = vertices.at(i);
+	int k = 1;
 		
-			for (int j = 0; j < 2; j++) {
+		for (int j = 0; j < 2; j++) {
 			
-				if (IsSteppable(p->posX,p->posY,p->posX+k,p->posY))
-				{
-				
-					p->neighbours.push_back(VertexAt(p->posX+k,p->posY));
-				}
-				if (IsSteppable(p->posX, p->posY, p->posX, p->posY + k))
-				{
-					p->neighbours.push_back(VertexAt(p->posX, p->posY + k));
-				}
-			k *= -1;
+			if (IsSteppable(vertex->posX, vertex->posY, vertex->posX+k, vertex->posY))
+			{	
+				vertex->neighbours.push_back(VertexAt(vertex->posX+k, vertex->posY));
 			}
-        }
+			if (IsSteppable(vertex->posX, vertex->posY, vertex->posX, vertex->posY + k))
+			{
+					vertex->neighbours.push_back(VertexAt(vertex->posX, vertex->posY + k));
+			}
+		k *= -1;
+		}
+	}
 }
 
 
@@ -118,7 +118,6 @@ int Map::ConvertHexaToDec(char c) {
 
 string Map::ConvertDecToBinaryS(int decimal) {
 	string d= std::bitset<4>(decimal).to_string();
-	//cout << "\n" << d << "\n";
 	return d;
 }
 
@@ -136,13 +135,13 @@ int Map::Dijkstra() {
 	while (!vertices.empty())
 	{
 		x = 0;
-		for (Point* var : vertices)
+		for (Point* vertex : vertices)
 		{
 			
-			if (step == var->value) {
+			if (step == vertex->value) {
 				x++;
 			
-				for (auto neighbour : var->neighbours)
+				for (auto neighbour : vertex->neighbours)
 				{
 					if (neighbour->value>step+1|| neighbour->value<0)
 					{
@@ -157,9 +156,9 @@ int Map::Dijkstra() {
 	}
 
 	int sum = 0;
-	for (auto elem : endpoints)
-		if(elem->value>0)
-			sum += elem->value - 1;
+	for (auto point : endpoints)
+		if(point->value>0)
+			sum += point->value - 1;
 		return sum;
 }
 
@@ -175,4 +174,5 @@ Map::~Map() {
 			delete vertices.back();
 			vertices.pop_back();
 		}
+		endpoints.clear();
 }

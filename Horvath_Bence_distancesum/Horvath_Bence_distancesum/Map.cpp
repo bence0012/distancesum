@@ -174,5 +174,4 @@ Map::~Map() {
 			delete vertices.back();
 			vertices.pop_back();
 		}
-		endpoints.clear();
 }

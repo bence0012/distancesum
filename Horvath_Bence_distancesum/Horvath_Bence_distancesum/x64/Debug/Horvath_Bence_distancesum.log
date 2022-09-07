@@ -1,9 +1,6 @@
 ﻿  Horvath_Bence_distancesum.cpp
 C:\Users\bence\source\repos\distancesum\Horvath_Bence_distancesum\Horvath_Bence_distancesum\Map.h(9,2): warning C4091: 'typedef ': ignored on left of 'Direction' when no variable is declared
-C:\Users\bence\source\repos\distancesum\Horvath_Bence_distancesum\Horvath_Bence_distancesum\Map.h(25,16): error C2535: 'int Map::Dijkstra(void)': member function already defined or declared
-C:\Users\bence\source\repos\distancesum\Horvath_Bence_distancesum\Horvath_Bence_distancesum\Map.h(24): message : see declaration of 'Map::Dijkstra'
   Map.cpp
 C:\Users\bence\source\repos\distancesum\Horvath_Bence_distancesum\Horvath_Bence_distancesum\Map.h(9,2): warning C4091: 'typedef ': ignored on left of 'Direction' when no variable is declared
-C:\Users\bence\source\repos\distancesum\Horvath_Bence_distancesum\Horvath_Bence_distancesum\Map.h(25,16): error C2535: 'int Map::Dijkstra(void)': member function already defined or declared
-C:\Users\bence\source\repos\distancesum\Horvath_Bence_distancesum\Horvath_Bence_distancesum\Map.h(24): message : see declaration of 'Map::Dijkstra'
   Generating Code...
+  Horvath_Bence_distancesum.vcxproj -> C:\Users\bence\Source\Repos\distancesum\Horvath_Bence_distancesum\x64\Debug\Horvath_Bence_distancesum.exe

@@ -8,7 +8,6 @@ int main()
     int height, width;
     cin >> height;
     cin >> width;
-  //  cout << height << " " << width;
     string mapIn="";
     string temp;
     cin.get();
@@ -16,7 +15,7 @@ int main()
          getline(cin, temp);
          mapIn+=temp;
     }
-  //  cout << mapIn;*/
+
     Map *map = new Map(height,width,mapIn);
     cout <<map->Dijkstra();
   

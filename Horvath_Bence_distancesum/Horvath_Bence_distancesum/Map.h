@@ -22,16 +22,17 @@ public:
 	bool IsSteppable(int startX, int startY, int destX, int destY);
 	void WhatDirection(int startX, int startY, int destX, int destY, Direction& dir);
 	int Dijkstra();
-	int NumberOfShortestPaths(Point* start);
+	int Dijkstra();
 	bool CharToBool(char c);
 	int ConvertHexaToDec(char c);
 	string ConvertDecToBinaryS(int decimal);
+	Point* VertexAt(int posX, int posY);
 private:
 
 	int height, width;
-	Point startPos;
+	int startPosX, startPosY;
 	char** map;
-	vector<Point*> verticies, endpoints;
+	vector<Point*> vertices, endpoints;
 
 };
 

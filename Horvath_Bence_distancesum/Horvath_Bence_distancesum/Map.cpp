@@ -14,61 +14,53 @@ Map::Map(int h, int w, string map) :height(h), width(w) {
 			this->map[i] = new char[width];
 
 	}
-		int x = 0;
-		for (int i = 0; i < height; i++)
+	int x = 0;
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
 		{
-			for (int j = 0; j < width; j++)
-			{
-				this->map[i][j] = map[x];
-				if (map[x] == 'T') {
-					startPos.posX = i;
-					startPos.posY = j;
-				}
-				x++;
+			this->map[i][j] = map[x];
+			if (map[x] == 'T') {
+				startPosX = i;
+				startPosY = j;
 			}
+			x++;
 		}
-		for (int i = 0; i < height; i++)
+	}
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
 		{
-			for (int j = 0; j < width; j++)
+			Point *v=new Point();
+			v->posX = i;
+			v->posY = j;
+			v->value = -1;
+			vertices.push_back(v);
+			if (this->map[i][j]!='X'&& this->map[i][j] != '-' && this->map[i][j]!='T')
 			{
-				Point *v=new Point();
-				v->posX = i;
-				v->posY = j;
-				v->value = -1;
-				verticies.push_back(v);
-				if (this->map[i][j]!='X'&& this->map[i][j] != '-' && this->map[i][j]!='T')
-				{
-					endpoints.push_back(v);
-				}
-				
+				endpoints.push_back(v);
 			}
-		}
-		//cout << unvisited.size();
-		for (int i = 0; i < width * height; i++) {
-			Point *p = verticies.at(i);
-			int k = 1;
 			
+		}
+	}
+		for (int i = 0; i < width * height; i++) {
+		Point *p = vertices.at(i);
+		int k = 1;
+		
 			for (int j = 0; j < 2; j++) {
-				
+			
 				if (IsSteppable(p->posX,p->posY,p->posX+k,p->posY))
 				{
-					
-					p->neighbours.push_back(verticies.at((p->posX+k) * width + p->posY));
+				
+					p->neighbours.push_back(VertexAt(p->posX+k,p->posY));
 				}
-				k *= -1;
-			}
-			for (int j = 2; j < 4; j++) {
-
-				if (IsSteppable(p->posX, p->posY, p->posX, p->posY+k))
+				if (IsSteppable(p->posX, p->posY, p->posX, p->posY + k))
 				{
-					p->neighbours.push_back(verticies.at(p->posX * width + p->posY + k));
+					p->neighbours.push_back(VertexAt(p->posX, p->posY + k));
 				}
-				k *= -1;
+			k *= -1;
 			}
-			
-		}
-		
-
+        }
 }
 
 
@@ -132,19 +124,19 @@ string Map::ConvertDecToBinaryS(int decimal) {
 
 int Map::Dijkstra() {
 	int step = 0;
-	verticies.at(startPos.posX * width + startPos.posY)->value = 0;
+	VertexAt(startPosX,startPosY)->value = 0;
 	
-	for (auto neighbour : verticies.at(startPos.posX * width + startPos.posY)->neighbours)
+	for (auto neighbour : VertexAt(startPosX, startPosY)->neighbours)
 	{
-	neighbour->value = step +1;
+		neighbour->value = step +1;
 	}
 	
 	step++;
 	int x;
-	while (!verticies.empty())
+	while (!vertices.empty())
 	{
 		x = 0;
-		for (Point* var : verticies)
+		for (Point* var : vertices)
 		{
 			
 			if (step == var->value) {
@@ -164,50 +156,23 @@ int Map::Dijkstra() {
 		step++;
 	}
 
-	cout << "\n";
-	for (auto elem : endpoints) {
-		//cout << elem->value << " ";
-	}
-
-	for (auto elem : verticies)
-	{
-		if (elem->value < 10 && elem->value > -1)
-			cout << "0";
-		cout << elem->value << " ";
-	}
-
-
-	cout << "\n"<< IsSteppable(1,8,1,7) << "\n";
 	int sum = 0;
 	for (auto elem : endpoints)
 		if(elem->value>0)
 			sum += elem->value - 1;
 		return sum;
-	
-
-
 }
-int Map::NumberOfShortestPaths(Point* start) {
 
-	
-	
-	if (start->value == 0)
-	{
-		return 1;
-	}
-	int x = 0;
-	for (auto neighbour : start->neighbours) {
-		if (neighbour->value < start->value) {
-			x += NumberOfShortestPaths(neighbour);
-		}
-		
-	}
-	return x;
-	
+Point* Map::VertexAt(int posX, int posY) {
+	return vertices.at(posX * width + posY);
 }
 
 Map::~Map() {
 		for (int i = 0; i < height; ++i)
 			delete map[i];
 		delete map;
+		while (!vertices.empty()) {
+			delete vertices.back();
+			vertices.pop_back();
+		}
 }

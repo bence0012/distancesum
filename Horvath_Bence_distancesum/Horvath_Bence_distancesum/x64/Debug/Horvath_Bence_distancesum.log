@@ -1,3 +1,6 @@
 ﻿  Horvath_Bence_distancesum.cpp
-C:\Users\bence\source\repos\Horvath_Bence_distancesum\Horvath_Bence_distancesum\Map.h(9,2): warning C4091: 'typedef ': ignored on left of 'Direction' when no variable is declared
-  Horvath_Bence_distancesum.vcxproj -> C:\Users\bence\source\repos\Horvath_Bence_distancesum\x64\Debug\Horvath_Bence_distancesum.exe
+C:\Users\bence\source\repos\distancesum\Horvath_Bence_distancesum\Horvath_Bence_distancesum\Map.h(9,2): warning C4091: 'typedef ': ignored on left of 'Direction' when no variable is declared
+  Map.cpp
+C:\Users\bence\source\repos\distancesum\Horvath_Bence_distancesum\Horvath_Bence_distancesum\Map.h(9,2): warning C4091: 'typedef ': ignored on left of 'Direction' when no variable is declared
+  Generating Code...
+  Horvath_Bence_distancesum.vcxproj -> C:\Users\bence\Source\Repos\distancesum\Horvath_Bence_distancesum\x64\Debug\Horvath_Bence_distancesum.exe

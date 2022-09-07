@@ -22,7 +22,6 @@ public:
 	bool IsSteppable(int startX, int startY, int destX, int destY);
 	void WhatDirection(int startX, int startY, int destX, int destY, Direction& dir);
 	int Dijkstra();
-	int Dijkstra();
 	bool CharToBool(char c);
 	int ConvertHexaToDec(char c);
 	string ConvertDecToBinaryS(int decimal);
